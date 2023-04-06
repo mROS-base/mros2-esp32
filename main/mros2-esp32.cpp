@@ -11,6 +11,7 @@
 
 #include "cmsis_os.h"
 #include "netif.h"
+#include "wifi.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -29,6 +30,7 @@ extern "C" void app_main(void)
 {
   // maybe need to initialize wifi
   // netif_posix_add(NETIF_IPADDR, NETIF_NETMASK);
+  init_wifi();
 
   osKernelStart();
 
@@ -45,3 +47,4 @@ extern "C" void app_main(void)
 
   mros2::spin();
 }
+
