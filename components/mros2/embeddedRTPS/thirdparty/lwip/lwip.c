@@ -9,10 +9,6 @@ static SemaphoreHandle_t xMutex = NULL;
 
 void MX_LWIP_Init(void)
 {
-  sys_init();
-  mem_init();
-  memp_init();
-  udp_init();
   xMutex = xSemaphoreCreateMutex();
   return;
 }
