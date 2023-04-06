@@ -16,14 +16,16 @@ set(SRCS "src/mros2.cpp"
         "embeddedRTPS/thirdparty/Micro-CDR/src/c/types/string.c"
         "embeddedRTPS/thirdparty/Micro-CDR/src/c/types/sequence.c"
         "embeddedRTPS/thirdparty/Micro-CDR/src/c/types/array.c"
-        "embeddedRTPS/thirdparty/lwip/default_netif.c")
+        "embeddedRTPS/thirdparty/lwip/default_netif.c"
+        "cmsis-esp32/cmsis-esp.c")
 
 set(INCS "include"
         "include/mros2"
         "mros2_msgs"
         "embeddedRTPS/include"
         "embeddedRTPS/thirdparty/lwip"
-        "embeddedRTPS/thirdparty/Micro-CDR/include")
+        "embeddedRTPS/thirdparty/Micro-CDR/include"
+        "cmsis-esp32/include")
 
 idf_component_register(SRCS ${SRCS}
                     INCLUDE_DIRS ${INCS})
