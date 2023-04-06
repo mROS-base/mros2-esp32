@@ -25,7 +25,8 @@ set(INCS "include"
         "embeddedRTPS/include"
         "embeddedRTPS/thirdparty/lwip"
         "embeddedRTPS/thirdparty/Micro-CDR/include"
-        "cmsis-esp32/include")
+        "cmsis-esp32/include"
+        "../../main/include")
 
 idf_component_register(SRCS ${SRCS}
                     INCLUDE_DIRS ${INCS})
