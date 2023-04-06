@@ -17,6 +17,7 @@ set(SRCS "src/mros2.cpp"
         "embeddedRTPS/thirdparty/Micro-CDR/src/c/types/sequence.c"
         "embeddedRTPS/thirdparty/Micro-CDR/src/c/types/array.c"
         "embeddedRTPS/thirdparty/lwip/default_netif.c"
+        "embeddedRTPS/thirdparty/lwip/lwip.c"
         "cmsis-esp32/cmsis-esp.c")
 
 set(INCS "include"
