@@ -7,7 +7,7 @@ This repository provides the reference implementation of mROS 2 that can be oper
 Please also check [mros2 repository](https://github.com/mROS-base/mros2) for more details and another implementations.
 
 ## Supported environment
-‐ ESP32-S3-DevKitC-1
+- ESP32-S3-DevKitC-1
 - M5Stack
 
 ## Getting Started
