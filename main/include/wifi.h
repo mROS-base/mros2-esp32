@@ -8,4 +8,10 @@
 #define WIFI_CONNECTED_BIT BIT0
 #define WIFI_FAIL_BIT BIT1
 
+// #define STATIC_IP
+#ifdef STATIC_IP
+#define NETIF_IPADDR "192.168.10.108"
+#define NETIF_NETMASK "255.255.255.0"
+#define NETIF_GW "192.168.10.1"
+#endif
 void init_wifi(void);

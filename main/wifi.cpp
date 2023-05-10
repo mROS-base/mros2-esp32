@@ -1,17 +1,15 @@
 #include "wifi.h"
 
-#include <string.h>
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
 #include "esp_system.h"
 #include "esp_wifi.h"
-#include "esp_event.h"
 #include "esp_log.h"
 #include "nvs_flash.h"
 
 #include "lwip/err.h"
-#include "lwip/sys.h"
+#include "lwip/ip_addr.h"
 
 static EventGroupHandle_t s_wifi_event_group;
 static const char *TAG = "wifi station";
@@ -24,6 +22,27 @@ static void event_handler(void *arg, esp_event_base_t event_base,
   {
     esp_wifi_connect();
   }
+#ifdef STATIC_IP
+  else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_CONNECTED)
+  {
+    esp_netif_t *netif = (esp_netif_t *)arg;
+    if (esp_netif_dhcpc_stop(netif) != ESP_OK)
+    {
+      ESP_LOGE(TAG, "Failed to stop dhcp client");
+      return;
+    }
+    esp_netif_ip_info_t ip;
+    memset(&ip, 0, sizeof(esp_netif_ip_info_t));
+    ip.ip.addr = ipaddr_addr(NETIF_IPADDR);
+    ip.netmask.addr = ipaddr_addr(NETIF_NETMASK);
+    ip.gw.addr = ipaddr_addr(NETIF_GW);
+    if (esp_netif_set_ip_info(netif, &ip) != ESP_OK)
+    {
+      ESP_LOGE(TAG, "Failed to set ip info");
+      return;
+    }
+  }
+#endif
   else if (event_base == WIFI_EVENT && event_id == WIFI_EVENT_STA_DISCONNECTED)
   {
     if (s_retry_num < EXAMPLE_ESP_MAXIMUM_RETRY)
