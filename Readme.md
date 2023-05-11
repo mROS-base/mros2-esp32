@@ -8,29 +8,38 @@ Please also check [mros2 repository](https://github.com/mROS-base/mros2) for mor
 
 ## Supported environment
 - ESP32-S3-DevKitC-1
-- M5Stack
+- M5Stack Basic
 
-## Getting Started
+# Getting Started
 
-### install esp-idf
+## install esp-idf
 https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html
 
-### clone and settings
+## clone and settings
 
 ```
 git clone https://github.com/mROS-base/mros2-esp32.git
 cd mros2-esp32
 ```
-Change WiFi SSID/Pass
+Change WiFi SSID/Pass and IP address
 - /main/include/wifi.h
-
 
 Change IP address
 - /components/include/rtps/config.h
 - /components/include/netif.h
 
-### build, flash, monitor
+## build sample application
 ```
+cd workspace/[sample application]/
+idf.py menuconfig  
+
+ /* in menuconfig */  
+  Component config -> LWIP -> IPv6 ->   
+
+  /*Disable IPv6*/
+  - [ ] IPv6 support (Disable)  
+ /* Save and Quit menuconfig */
+
 idf.py build
 idf.py -p [PORT] flash
 idf.py -p [PORT] monitor
