@@ -28,9 +28,30 @@ Change IP address
 - /components/include/rtps/config.h
 - /components/include/netif.h
 
-## build sample application
+## Examples
+This repository contains some example applications in [workspace/](workspace/) to communicate with ROS 2 nodes on the host.
+Of course you can also create a new program file and specify it as your own application.
+
+Please also check [mROS-base/mros2-host-examples](https://github.com/mROS-base/mros2-host-examples) repository for more detail about the host examples.
+
+Currently, the following examples are available.
+- echoback_string
+- echoreply_string
+- pub_float32
+- pub_twist
+- sub_pose
+- sub_uint16
+
+The following examples are under development. cannot build now.
+- mturtle_teleop
+- mturtle_teleop_joy
+- pub_image
+- pub_long_string_sub_crc
+
+## build Examples
+
 ```
-cd workspace/[sample application]/
+cd workspace/[Example]/
 idf.py menuconfig  
 
  /* in menuconfig */  
