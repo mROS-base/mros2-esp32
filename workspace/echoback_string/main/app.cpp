@@ -19,21 +19,21 @@
 #include "std_msgs/msg/string.hpp"
 #include "EthernetInterface.h"
 
-#define IP_ADDRESS ("192.168.11.2") /* IP address */
-#define SUBNET_MASK ("255.255.255.0") /* Subnet mask */
+#define IP_ADDRESS ("192.168.11.2")      /* IP address */
+#define SUBNET_MASK ("255.255.255.0")    /* Subnet mask */
 #define DEFAULT_GATEWAY ("192.168.11.1") /* Default gateway */
 
 /* convert TARGET_NAME to put into message */
 #define quote(x) std::string(q(x))
 #define q(x) #x
 
-
 void userCallback(std_msgs::msg::String *msg)
 {
   printf("subscribed msg: '%s'\r\n", msg->data.c_str());
 }
 
-int main() {
+int main()
+{
   EthernetInterface network;
   network.set_dhcp(false);
   network.set_network(IP_ADDRESS, SUBNET_MASK, DEFAULT_GATEWAY);
@@ -52,7 +52,8 @@ int main() {
   MROS2_INFO("ready to pub/sub message\r\n");
 
   auto count = 0;
-  while (1) {
+  while (1)
+  {
     auto msg = std_msgs::msg::String();
     msg.data = "Hello from mros2-mbed onto " + quote(TARGET_NAME) + ": " + std::to_string(count++);
     printf("publishing msg: '%s'\r\n", msg.data.c_str());
