@@ -9,6 +9,8 @@ Please also check [mros2 repository](https://github.com/mROS-base/mros2) for mor
 ## Supported environment
 - ESP32-S3-DevKitC-1
 - M5Stack Basic
+- M5Stack Core2
+- M5Stack CoreS3
 
 # Getting Started
 
@@ -21,12 +23,11 @@ https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html
 git clone https://github.com/mROS-base/mros2-esp32.git
 cd mros2-esp32
 ```
-Change WiFi SSID/Pass and IP address
+Change WiFi SSID/Pass
 - /main/include/wifi.h
 
 Change IP address
 - /components/include/rtps/config.h
-- /components/include/netif.h
 
 ## Examples
 This repository contains some example applications in [workspace/](workspace/) to communicate with ROS 2 nodes on the host.
@@ -49,9 +50,15 @@ The following examples are under development. cannot build now.
 - pub_long_string_sub_crc
 
 ## build Examples
-
 ```
 cd workspace/[Example]/
+
+/* M5Stack Basic/Core2 */
+idf.py set-target esp32
+
+/* ESP32S3Dev / M5Stack CoreS3 */
+idf.py set-target esp32s3
+
 idf.py menuconfig  
 
  /* in menuconfig */  
