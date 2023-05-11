@@ -23,11 +23,19 @@ set(SRCS "src/mros2.cpp"
 set(INCS "include"
         "include/mros2"
         "mros2_msgs"
+        "custom_msgs"
         "embeddedRTPS/include"
         "embeddedRTPS/thirdparty/lwip"
         "embeddedRTPS/thirdparty/Micro-CDR/include"
-        "cmsis-esp32/include"
-        "../../main/include")
+        "cmsis-esp32/include")
 
-idf_component_register(SRCS ${SRCS}
-                    INCLUDE_DIRS ${INCS})
+idf_component_register(
+        SRCS ${SRCS}
+        INCLUDE_DIRS ${INCS})
+
+add_custom_command(
+        OUTPUT templates.hpp
+        COMMAND python3 ${COMPONENT_PATH}/mros2_header_generator/templates_generator.py ${CMAKE_SOURCE_DIR}/main ${COMPONENT_PATH})
+add_custom_target(Template SOURCES templates.hpp)
+add_dependencies(${COMPONENT_LIB} Template)
+        

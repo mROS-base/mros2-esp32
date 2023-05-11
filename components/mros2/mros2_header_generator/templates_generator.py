@@ -5,6 +5,12 @@ from jinja2 import Environment, FileSystemLoader
 
 arg = sys.argv
 app = arg[1]
+if arg.__len__() > 1:
+    componentPath = arg[2]
+    outputPath = componentPath+"/include/mros2"
+else:
+    componentPath = "../mros2"
+    outputPath = app
 
 includeFiles = []
 pubMsgTypes = []
@@ -38,12 +44,11 @@ def main():
                 includeFiles.append(includeFile)
                 
                 
-    env = Environment(loader=FileSystemLoader('../mros2/mros2_header_generator'))
+    env = Environment(loader=FileSystemLoader(componentPath+"/mros2_header_generator/"))
     template = env.get_template('templates.tpl')
     datatext = template.render({ "includeFiles":includeFiles, "pubMsgTypes":pubMsgTypes, "subMsgTypes":subMsgTypes  })
-    with open(os.path.join(app+"/templates.hpp"), "wb") as f:
+    with open(os.path.join(outputPath+"/templates.hpp"), "wb") as f:
         f.write(datatext.encode('utf-8'))
-
 
 if __name__ == "__main__":
     main()
