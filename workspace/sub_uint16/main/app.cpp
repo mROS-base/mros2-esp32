@@ -30,11 +30,6 @@ extern "C" void app_main(void)
   init_wifi();
   osKernelStart();
 
-  EthernetInterface network;
-  network.set_dhcp(false);
-  network.set_network(IP_ADDRESS, SUBNET_MASK, DEFAULT_GATEWAY);
-  nsapi_size_or_error_t result = network.connect();
-
   printf("mbed mros2 start!\r\n");
   printf("app name: sub_uint16\r\n");
   mros2::init(0, NULL);
