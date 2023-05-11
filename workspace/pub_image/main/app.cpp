@@ -14,24 +14,17 @@
  * limitations under the License.
  */
 
-#include "mbed.h"
 #include "mros2.h"
 #include "sensor_msgs/msg/image.hpp"
-#include "EthernetInterface.h"
-
 #include "mros_image.h"
 
-#define IP_ADDRESS ("192.168.11.2") /* IP address */
-#define SUBNET_MASK ("255.255.255.0") /* Subnet mask */
-#define DEFAULT_GATEWAY ("192.168.11.1") /* Default gateway */
+#include "cmsis_os.h"
+#include "wifi.h"
 
-
-int main(int argc, char* argv[])
+extern "C" void app_main(void)
 {
-  EthernetInterface network;
-  network.set_dhcp(false);
-  network.set_network(IP_ADDRESS, SUBNET_MASK, DEFAULT_GATEWAY);
-  nsapi_size_or_error_t result = network.connect();
+  init_wifi();
+  osKernelStart();
 
   printf("mros2-posix start!\r\n");
   printf("app name: pub_image\r\n");
@@ -67,5 +60,5 @@ int main(int argc, char* argv[])
   }
 
   mros2::spin();
-  return 0;
+  return;
 }

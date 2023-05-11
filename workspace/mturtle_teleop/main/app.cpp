@@ -14,15 +14,12 @@
  * limitations under the License.
  */
 
-#include "mbed.h"
 #include "mros2.h"
 #include "geometry_msgs/msg/vector3.hpp"
 #include "geometry_msgs/msg/twist.hpp"
-#include "EthernetInterface.h"
 
-#define IP_ADDRESS ("192.168.11.2") /* IP address */
-#define SUBNET_MASK ("255.255.255.0") /* Subnet mask */
-#define DEFAULT_GATEWAY ("192.168.11.1") /* Default gateway */
+#include "cmsis_os.h"
+#include "wifi.h"
 
 AnalogIn inputA0(A0);
 AnalogIn inputA1(A1);
@@ -62,11 +59,10 @@ std::string double_to_string(double value)
   return str;
 }
 
-int main() {
-  EthernetInterface network;
-  network.set_dhcp(false);
-  network.set_network(IP_ADDRESS, SUBNET_MASK, DEFAULT_GATEWAY);
-  nsapi_size_or_error_t result = network.connect();
+extern "C" void app_main(void)
+{
+  init_wifi();
+  osKernelStart();
 
   printf("mbed mros2 start!\r\n");
   printf("app name: mturtle_teleop\r\n");
@@ -204,5 +200,5 @@ int main() {
   }
 
   mros2::spin();
-  return 0;
+  return;
 }

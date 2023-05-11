@@ -14,15 +14,11 @@
  * limitations under the License.
  */
 
-#include "mbed.h"
 #include "mros2.h"
 #include "std_msgs/msg/string.hpp"
-#include "EthernetInterface.h"
 
-#define IP_ADDRESS ("192.168.11.2") /* IP address */
-#define SUBNET_MASK ("255.255.255.0") /* Subnet mask */
-#define DEFAULT_GATEWAY ("192.168.11.1") /* Default gateway */
-
+#include "cmsis_os.h"
+#include "wifi.h"
 
 mros2::Subscriber sub;
 mros2::Publisher pub;
@@ -34,11 +30,10 @@ void userCallback(std_msgs::msg::String *msg)
   pub.publish(*msg);
 }
 
-int main() {
-  EthernetInterface network;
-  network.set_dhcp(false);
-  network.set_network(IP_ADDRESS, SUBNET_MASK, DEFAULT_GATEWAY);
-  nsapi_size_or_error_t result = network.connect();
+extern "C" void app_main(void)
+{
+  init_wifi();
+  osKernelStart();
 
   printf("mbed mros2 start!\r\n");
   printf("app name: echoreply_string\r\n");
@@ -52,5 +47,5 @@ int main() {
   MROS2_INFO("ready to pub/sub message\r\n");
 
   mros2::spin();
-  return 0;
+  return;
 }

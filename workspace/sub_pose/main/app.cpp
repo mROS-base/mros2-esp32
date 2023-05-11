@@ -14,26 +14,21 @@
  * limitations under the License.
  */
 
-#include "mbed.h"
 #include "mros2.h"
 #include "geometry_msgs/msg/pose.hpp"
-#include "EthernetInterface.h"
 
-#define IP_ADDRESS ("192.168.11.2") /* IP address */
-#define SUBNET_MASK ("255.255.255.0") /* Subnet mask */
-#define DEFAULT_GATEWAY ("192.168.11.1") /* Default gateway */
-
+#include "cmsis_os.h"
+#include "wifi.h"
 
 void userCallback(geometry_msgs::msg::Pose *msg)
 {
   MROS2_INFO("subscribed Pose msg!!");
 }
 
-int main() {
-  EthernetInterface network;
-  network.set_dhcp(false);
-  network.set_network(IP_ADDRESS, SUBNET_MASK, DEFAULT_GATEWAY);
-  nsapi_size_or_error_t result = network.connect();
+extern "C" void app_main(void)
+{
+  init_wifi();
+  osKernelStart();
 
   printf("mbed mros2 start!\r\n");
   printf("app name: sub_pose\r\n");
@@ -46,5 +41,5 @@ int main() {
   MROS2_INFO("ready to pub/sub message");
 
   mros2::spin();
-  return 0;
+  return;
 }
