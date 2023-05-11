@@ -5,7 +5,7 @@
 
 osStatus_t osDelay(uint32_t ticks)
 {
-  vTaskDelay(ticks);
+  vTaskDelay(ticks / portTICK_PERIOD_MS);
   return osOK;
 }
 
