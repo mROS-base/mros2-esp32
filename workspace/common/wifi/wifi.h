@@ -14,4 +14,10 @@
 #define NETIF_NETMASK "255.255.255.0"
 #define NETIF_GW "192.168.11.1"
 #endif
-void init_wifi(void);
+#ifdef __cplusplus
+extern "C" {
+#endif
+extern void init_wifi(void);
+#ifdef __cplusplus
+}
+#endif
