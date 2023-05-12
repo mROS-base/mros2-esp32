@@ -1,8 +1,0 @@
-#Folders
-.idea
-build
-cmake-build-debug
-cmake-build-release
-thirdparty/Micro-CDR/CMakeFiles
-include/rtps/config.h
-CMakeFiles
