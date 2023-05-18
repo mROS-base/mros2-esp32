@@ -1,0 +1,3 @@
+[submodule "mros2"]
+	path = mros2
+	url = https://github.com/mROS-base/mros2.git
