@@ -17,17 +17,22 @@ Please also check [mros2 repository](https://github.com/mROS-base/mros2) for mor
 ## install esp-idf
 https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html
 
-## clone and settings
-
+## git clone and settings
 ```
-git clone https://github.com/mROS-base/mros2-esp32.git
+git clone --recursive https://github.com/mROS-base/mros2-esp32.git
 cd mros2-esp32
 ```
-Change WiFi SSID/Pass
-- /main/include/wifi.h
+### Change WiFi SSID/Pass
+```/workspace/common/wifi/wifi.h```
 
-Change IP address
-- /components/include/rtps/config.h
+### Change IP address
+Copy and rename ```/mros2/embeddedRTPS/include/rtps/config_esp32.h``` to ```/mros2/embeddedRTPS/include/rtps/config.h```.
+
+Change IP address in ```/mros2/embeddedRTPS/include/rtps/config.h```.
+
+When using DHCP, it is also necessary to specify the IP address.
+Flash the app and check the IP address from startup log.
+After that chenge the IP address in ```config.h``` and rebuild it.
 
 ## Examples
 This repository contains some example applications in [workspace/](workspace/) to communicate with ROS 2 nodes on the host.
@@ -53,7 +58,7 @@ The following examples are under development. cannot build now.
 ```
 cd workspace/[Example]/
 
-/* M5Stack Basic/Core2 */
+/* M5Stack Basic / M5Stack Core2 */
 idf.py set-target esp32
 
 /* ESP32S3Dev / M5Stack CoreS3 */
