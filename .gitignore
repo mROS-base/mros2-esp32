@@ -2,4 +2,4 @@ build/
 sdkconfig
 *.old
 *.lock
-workspace/common/wifi.h
+wifi.h
