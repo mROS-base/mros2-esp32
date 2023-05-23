@@ -17,6 +17,14 @@ Please also check [mros2 repository](https://github.com/mROS-base/mros2) for mor
 ## install esp-idf
 https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html
 
+
+After install esp-idf, you need to install jinja2 library in esp-idf environment.
+```
+cd [esp-idf directory]
+. ./export.sh
+python -m pip install jinja2
+```
+
 ## git clone and settings
 ```
 git clone --recursive https://github.com/mROS-base/mros2-esp32.git
