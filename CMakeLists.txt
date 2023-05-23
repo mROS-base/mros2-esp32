@@ -24,12 +24,12 @@ set(SRCS "mros2/src/mros2.cpp"
 set(INCS "mros2/include"
         "mros2/include/mros2"
         "mros2/mros2_msgs"
-        # "mros2/custom_msgs"
         "mros2/embeddedRTPS/include"
         "mros2/embeddedRTPS/thirdparty/lwip"
         "mros2/embeddedRTPS/thirdparty/Micro-CDR/include"
         "cmsis-esp32/include"
         ${CMAKE_SOURCE_DIR}/main
+        "workspace/custom_msgs"
         )
 
 idf_component_register(
