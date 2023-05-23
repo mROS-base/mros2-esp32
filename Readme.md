@@ -51,9 +51,7 @@ M5Stack_sample project needs [M5Unified](https://github.com/m5stack/M5Unified) a
 Git clone these libraries to ```common/``` directory.
 
 
-The following examples are under development. cannot build now.
-- mturtle_teleop
-- mturtle_teleop_joy
+The following examples are under development. untested.
 - pub_image
 - pub_long_string_sub_crc
 
