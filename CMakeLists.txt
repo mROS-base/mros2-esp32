@@ -29,7 +29,7 @@ set(INCS "mros2/include"
         "mros2/embeddedRTPS/thirdparty/Micro-CDR/include"
         "cmsis-esp32/include"
         ${CMAKE_SOURCE_DIR}/main
-        "workspace/custom_msgs"
+        "custom_msgs"
         )
 
 idf_component_register(
