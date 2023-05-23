@@ -2,4 +2,3 @@ build/
 sdkconfig
 *.old
 *.lock
-wifi.h
