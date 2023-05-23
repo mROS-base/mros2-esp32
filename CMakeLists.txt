@@ -29,6 +29,7 @@ set(INCS "mros2/include"
         "mros2/embeddedRTPS/thirdparty/lwip"
         "mros2/embeddedRTPS/thirdparty/Micro-CDR/include"
         "cmsis-esp32/include"
+        ${CMAKE_SOURCE_DIR}/main
         )
 
 idf_component_register(
@@ -37,6 +38,6 @@ idf_component_register(
 
 add_custom_command(
         OUTPUT templates.hpp
-        COMMAND python3 ${COMPONENT_PATH}/mros2/mros2_header_generator/templates_generator.py ${CMAKE_SOURCE_DIR}/main ${COMPONENT_PATH}/mros2/include/mros2)
+        COMMAND python3 ${COMPONENT_PATH}/mros2/mros2_header_generator/templates_generator.py ${CMAKE_SOURCE_DIR}/main)
 add_custom_target(Template SOURCES templates.hpp)
 add_dependencies(${COMPONENT_LIB} Template)
