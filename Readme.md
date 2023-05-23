@@ -12,7 +12,7 @@ Please also check [mros2 repository](https://github.com/mROS-base/mros2) for mor
 - M5Stack Core2
 - M5Stack CoreS3
 
-# Getting Started
+# Quickstart by this repository itself
 
 ## install esp-idf
 https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html
@@ -26,9 +26,7 @@ cd mros2-esp32
 ```/workspace/common/wifi/wifi.h```
 
 ### Change IP address
-Copy and rename ```/mros2/embeddedRTPS/include/rtps/config_esp32.h``` to ```/mros2/embeddedRTPS/include/rtps/config.h```.
-
-Change IP address in ```/mros2/embeddedRTPS/include/rtps/config.h```.
+Change IP address in ```/mros2/include/rtps/config.h```.
 
 When using DHCP, it is also necessary to specify the IP address.
 Flash the app and check the IP address from startup log.
@@ -83,4 +81,10 @@ idf.py build
 idf.py -p [PORT] flash
 idf.py -p [PORT] monitor
 ```
+# Usage into your ESP-IDF project
+If you needs to use mros2 into your ESP-IDF project, 
+clone this repository to ```components``` directory in your project.
 
+mros2 needs network connection and setting of IP address.
+Please see [Wifi connection example](workspace/common/wifi).
+IP address setting find in upper section [Change IP address](#change-ip-address).
