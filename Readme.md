@@ -19,11 +19,6 @@ https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html
 
 
 After install esp-idf, you need to install jinja2 library in esp-idf environment.
-```
-cd [esp-idf directory]
-. ./export.sh
-python -m pip install jinja2
-```
 
 ## git clone and settings
 ```
@@ -31,10 +26,10 @@ git clone --recursive https://github.com/mROS-base/mros2-esp32.git
 cd mros2-esp32
 ```
 ### Change WiFi SSID/Pass
-```/workspace/common/wifi/wifi.h```
+Change ESP_WIFI_SSID and ESP_WIFI_PASS in ```/workspace/common/wifi/wifi.h```.
 
 ### Change IP address
-Change IP address in ```/mros2/include/rtps/config.h```.
+Change IP address in ```/include/rtps/config.h```.
 
 When using DHCP, it is also necessary to specify the IP address.
 Flash the app and check the IP address from startup log.
@@ -84,8 +79,15 @@ idf.py menuconfig
  /* Save and Quit menuconfig */
 
 idf.py build
+
+/* If an error occurs, try the following*/
+  python -m pip install jinja2
+/* --- */
+
 idf.py -p [PORT] flash
+
 idf.py -p [PORT] monitor
+/* To exit monitor, press Ctrl + ] */
 ```
 # Usage into your ESP-IDF project
 If you needs to use mros2 into your ESP-IDF project, 
