@@ -6,4 +6,4 @@ set(EXTRA_COMPONENT_DIRS ../../ ../common)
 add_compile_options(-w)
 
 include($ENV{IDF_PATH}/tools/cmake/project.cmake)
-project(pub_float32)
+project(m5stack_sample)
