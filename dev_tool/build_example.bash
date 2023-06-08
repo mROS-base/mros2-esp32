@@ -1,7 +1,7 @@
 # if mros2-esp32 not found : clone https://github.com/mROS-base/mros2-esp32.git --recursive
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 PORT=${1:-/dev/ttyUSB0}
-MROS2_DIR=${2:-${SCRIPT_DIR}/mros2-esp32}
+MROS2_DIR=${2:-${SCRIPT_DIR}/../../mros2-esp32}
 WORKSPACE=${3:-${SCRIPT_DIR}/../workspace/echoback_string}
 TARGET=${4:-esp32}
 
@@ -21,7 +21,7 @@ echo "TARGET=${TARGET}" >> ${SCRIPT_DIR}/.env
 
 cd ${SCRIPT_DIR}
 
-if [ ! -d ${SCRIPT_DIR}/mros2-esp32 ]; then
+if [ ! -d ${MROS2_DIR} ]; then
     git clone --recursive https://github.com/mROS-base/mros2-esp32.git -b main
 fi
 
