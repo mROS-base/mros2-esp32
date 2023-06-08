@@ -7,7 +7,6 @@ cd /jinja2 && pip3 install .
 cd ${SCRIPT_DIR}
 rm -rf ${SCRIPT_DIR}/build/
 
-
 idf.py set-target ${TARGET}
 if [ $? -ne 0 ]; then
     echo "Failed to set target"

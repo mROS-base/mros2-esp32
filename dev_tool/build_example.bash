@@ -1,4 +1,4 @@
-# if mros2-esp32 not found : clone https://github.com/mROS-base/mros2-esp32.git --recursive
+#!/bin/bash
 SCRIPT_DIR=$(cd $(dirname $0); pwd)
 PORT=${1:-/dev/ttyUSB0}
 MROS2_DIR=${2:-${SCRIPT_DIR}/../../mros2-esp32}
