@@ -2,7 +2,6 @@
 SCRIPT_DIR=/mros2-esp32/workspace/target/
 
 . /esp/esp-idf/export.sh
-cd /jinja2 && pip3 install .
 
 cd ${SCRIPT_DIR}
 rm -rf ${SCRIPT_DIR}/build/
