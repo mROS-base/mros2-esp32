@@ -1,0 +1,18 @@
+version: "3"
+services:
+  mros2_esp32:
+    build:
+      context: ./docker
+      dockerfile: esp_idf.dockerfile
+    container_name: esp_idf
+    volumes:
+      - ${MROS2_DIR}:/mros2-esp32
+      - ${WORKSPACE}:/mros2-esp32/workspace/target
+    devices:
+      - ${PORT}:${PORT}
+    environment:
+      - PORT=${PORT}
+      - TARGET=${TARGET}
+    command: ["/tmp/build_mros2.bash"]
+    env_file:
+      - .env
