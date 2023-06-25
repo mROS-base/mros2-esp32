@@ -18,11 +18,10 @@ echo "MROS2_DIR=${MROS2_DIR}" >> ${SCRIPT_DIR}/.env
 echo "WORKSPACE=${WORKSPACE}" >> ${SCRIPT_DIR}/.env
 echo "TARGET=${TARGET}" >> ${SCRIPT_DIR}/.env
 
-
 cd ${SCRIPT_DIR}
 
 if [ ! -d ${MROS2_DIR} ]; then
-    git clone --recursive https://github.com/mROS-base/mros2-esp32.git -b main
+    echo "mros2-esp32 directory not found."
 fi
 
 docker-compose up --build mros2_esp32
