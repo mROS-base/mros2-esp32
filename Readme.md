@@ -11,6 +11,7 @@ Please also check [mros2 repository](https://github.com/mROS-base/mros2) for mor
 - M5Stack Basic
 - M5Stack Core2
 - M5Stack CoreS3
+- XIAO ESP32C3 (see [#7](https://github.com/mROS-base/mros2-esp32/issues/7))
 
 # Quickstart by this repository itself
 
