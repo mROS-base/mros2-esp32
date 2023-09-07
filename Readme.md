@@ -21,6 +21,8 @@ https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html
 
 After install esp-idf, you need to install jinja2 library in esp-idf environment.
 
+Currently, we checked the operation of basic sapmles with esp-idf v5.1.1.
+
 ## git clone and settings
 ```
 git clone --recursive https://github.com/mROS-base/mros2-esp32.git
@@ -50,9 +52,9 @@ Currently, the following examples are available.
 - sub_pose
 - sub_uint16
 - m5stack_sample
-
-M5Stack_sample project needs [M5Unified](https://github.com/m5stack/M5Unified) and [M5GFX](https://github.com/m5stack/M5GFX) libraries.  
-Git clone these libraries to ```common/``` directory.
+  - M5Stack_sample project needs [M5Unified](https://github.com/m5stack/M5Unified) and [M5GFX](https://github.com/m5stack/M5GFX) libraries.
+    Git clone these libraries to ```common/``` directory.  
+    Note that you need to use ESP-IDF v4.4.4 to try this sample due to the compatibility of these libraries.
 
 
 The following examples are under development. untested.
