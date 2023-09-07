@@ -99,3 +99,10 @@ clone this repository to ```components``` directory in your project.
 mros2 needs network connection and setting of IP address.
 Please see [Wifi connection example](workspace/common/wifi).
 IP address setting find in upper section [Change IP address](#change-ip-address).
+
+# Awesome resources!
+
+The following are trial reports written by third-party users. We deeply appreciate your contributions! Of course, PR for adding your reports/articles, example of works are very welcome!!
+
+- [@tasada038](https://github.com/tasada038): 「[mros2-esp32とM5Stackでサンプルプログラムを試す](https://zenn.dev/tasada038/articles/fdbf3e5ff7cd01)」
+- [@Ar-Ray-code](https://github.com/Ar-Ray-code): 「[mros2-esp32をDocker内でビルドする](https://ar-ray.hatenablog.com/entry/2023/06/10/235333)」
