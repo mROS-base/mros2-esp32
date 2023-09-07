@@ -11,6 +11,7 @@ Please also check [mros2 repository](https://github.com/mROS-base/mros2) for mor
 - M5Stack Basic
 - M5Stack Core2
 - M5Stack CoreS3
+- XIAO ESP32C3 (see [#7](https://github.com/mROS-base/mros2-esp32/issues/7))
 
 # Quickstart by this repository itself
 
@@ -19,6 +20,8 @@ https://docs.espressif.com/projects/esp-idf/en/latest/esp32/index.html
 
 
 After install esp-idf, you need to install jinja2 library in esp-idf environment.
+
+Currently, we checked the operation of basic sapmles with esp-idf v5.1.1.
 
 ## git clone and settings
 ```
@@ -49,9 +52,9 @@ Currently, the following examples are available.
 - sub_pose
 - sub_uint16
 - m5stack_sample
-
-M5Stack_sample project needs [M5Unified](https://github.com/m5stack/M5Unified) and [M5GFX](https://github.com/m5stack/M5GFX) libraries.  
-Git clone these libraries to ```common/``` directory.
+  - M5Stack_sample project needs [M5Unified](https://github.com/m5stack/M5Unified) and [M5GFX](https://github.com/m5stack/M5GFX) libraries.
+    Git clone these libraries to ```common/``` directory.  
+    Note that you need to use ESP-IDF v4.4.4 to try this sample due to the compatibility of these libraries.
 
 
 The following examples are under development. untested.
@@ -96,3 +99,10 @@ clone this repository to ```components``` directory in your project.
 mros2 needs network connection and setting of IP address.
 Please see [Wifi connection example](workspace/common/wifi).
 IP address setting find in upper section [Change IP address](#change-ip-address).
+
+# Awesome resources!
+
+The following are trial reports written by third-party users. We deeply appreciate your contributions! Of course, PR for adding your reports/articles, example of works are very welcome!!
+
+- [@tasada038](https://github.com/tasada038): 「[mros2-esp32とM5Stackでサンプルプログラムを試す](https://zenn.dev/tasada038/articles/fdbf3e5ff7cd01)」
+- [@Ar-Ray-code](https://github.com/Ar-Ray-code): 「[mros2-esp32をDocker内でビルドする](https://ar-ray.hatenablog.com/entry/2023/06/10/235333)」
