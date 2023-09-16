@@ -39,6 +39,6 @@ idf_component_register(
 
 add_custom_command(
         OUTPUT templates.hpp
-        COMMAND python3 ${COMPONENT_PATH}/mros2/mros2_header_generator/templates_generator.py ${CMAKE_SOURCE_DIR}/main)
+        COMMAND python3 ${COMPONENT_PATH}/mros2/mros2_header_generator/templates_generator.py --outdir ${COMPONENT_PATH}/platform --file ${CMAKE_SOURCE_DIR}/main/${APP_SRCS})
 add_custom_target(Template SOURCES templates.hpp)
 add_dependencies(${COMPONENT_LIB} Template)
