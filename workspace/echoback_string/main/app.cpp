@@ -1,5 +1,5 @@
 /* mros2 example
- * Copyright (c) 2022 mROS-base
+ * Copyright (c) 2023 mROS-base
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,14 +15,12 @@
  */
 
 #include "mros2.h"
+#include "mros2-platform.h"
 #include "std_msgs/msg/string.hpp"
 
 #include "cmsis_os.h"
 #include "wifi.h"
 
-/* convert TARGET_NAME to put into message */
-#define quote(x) std::string(q(x))
-#define q(x) #x
 
 void userCallback(std_msgs::msg::String *msg)
 {
@@ -31,11 +29,25 @@ void userCallback(std_msgs::msg::String *msg)
 
 extern "C" void app_main(void)
 {
+  printf("mbed mros2 start!\r\n");
+  printf("app name: echoback_string\r\n");
+
+  /* connect to the network, but not be used yet */
+  //mros2_platform::network_connect();
+
   init_wifi();
   osKernelStart();
 
-  printf("mbed mros2 start!\r\n");
-  printf("app name: echoback_string\r\n");
+  /* get mros2 IP address and set it to RTPS */
+  std::array<uint8_t, 4> ipaddr;
+  uint8_t mros2_ip_addr_octet[4];
+  get_mros2_ip_addr(mros2_ip_addr_octet);
+  for (int i = 0; i < 4; i++)
+    ipaddr[i] = mros2_ip_addr_octet[i];
+  
+  MROS2_INFO("set mros2 IP address to RTPS: %d.%d.%d.%d\r\n", ipaddr[0], ipaddr[1], ipaddr[2], ipaddr[3]);
+  mros2::setIPAddrRTPS(ipaddr);
+
   mros2::init(0, NULL);
   MROS2_DEBUG("mROS 2 initialization is completed\r\n");
 
@@ -50,7 +62,7 @@ extern "C" void app_main(void)
   while (1)
   {
     auto msg = std_msgs::msg::String();
-    msg.data = "Hello from mros2-mbed onto " + quote(TARGET_NAME) + ": " + std::to_string(count++);
+    msg.data = "Hello from " + std::string(MROS2_PLATFORM_NAME) + " onto " + quote(TARGET_NAME) + ": " + std::to_string(count++);
     printf("publishing msg: '%s'\r\n", msg.data.c_str());
     pub.publish(msg);
     osDelay(1000);
