@@ -1,3 +1,10 @@
+/*
+ * NOTE:
+ *   This file is copied from esp-idf examples as the below, and modified for usage of mros2-esp32.
+ *   https://github.com/espressif/esp-idf/blob/master/examples/wifi/getting_started/station/main/station_example_main.c
+ *   Therefore, mROS-base org inherits the Public Domain (or CC0) LICENCE for this file from the original file.
+ */
+
 #include "wifi.h"
 
 #include "freertos/FreeRTOS.h"

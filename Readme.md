@@ -29,10 +29,10 @@ git clone --recursive https://github.com/mROS-base/mros2-esp32.git
 cd mros2-esp32
 ```
 ### Change WiFi SSID/Pass
-Change ESP_WIFI_SSID and ESP_WIFI_PASS in ```/workspace/common/wifi/wifi.h```.
+Change ESP_WIFI_SSID and ESP_WIFI_PASS in `platform/wifi/wifi.h`.
 
 ### Change IP address
-Change IP address in ```/include/rtps/config.h```.
+Change IP address in `platform/rtps/config.h`.
 
 When using DHCP, it is also necessary to specify the IP address.
 Flash the app and check the IP address from startup log.

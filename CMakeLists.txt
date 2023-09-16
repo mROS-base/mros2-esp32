@@ -28,8 +28,8 @@ set(INCS "mros2/include"
         "mros2/embeddedRTPS/thirdparty/lwip"
         "mros2/embeddedRTPS/thirdparty/Micro-CDR/include"
         "cmsis-esp32/include"
-        "include"
-        "custom_msgs"
+        "platform"
+        "workspace/custom_msgs"
         ${CMAKE_SOURCE_DIR}/main
         )
 
