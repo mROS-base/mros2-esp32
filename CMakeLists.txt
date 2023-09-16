@@ -29,6 +29,7 @@ set(INCS "mros2/include"
         "mros2/embeddedRTPS/thirdparty/Micro-CDR/include"
         "cmsis-esp32/include"
         "platform"
+        "platform/wifi"
         "workspace/custom_msgs"
         ${CMAKE_SOURCE_DIR}/main
         )
