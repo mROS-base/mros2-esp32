@@ -25,33 +25,15 @@
 #include "wifi.h"
 
 
-namespace mros2_platform
-{
-
 /*
  *  Setup network I/F
  */
-esp_err_t network_connect(void)
+extern "C" esp_err_t mros2_platform_network_connect(void)
 {
   init_wifi();
   osKernelStart();
-  osDelay(10000);
 
-  /*
-  SocketAddress socketAddress;
-  network.get_ip_address(&socketAddress);
-  const char* ip_address = socketAddress.get_ip_address();
-  printf("  IP Address: %s\r\n", ip_address);
-  */
-
-  /* convert IP address to be used in rtps/config.h */
-  //std::array<uint8_t, 4> ipaddr;
-  //sscanf(ip_address, "%d.%d.%d.%d", &ipaddr[0], &ipaddr[1], &ipaddr[2], &ipaddr[3]);
-  //std::array<uint8_t, 4> ipaddr = { 192, 168, 11, 104 };
-
-  //mros2::setIPAddrRTPS(ipaddr);
-
-  //return result;
+  /* get mros2 IP address and set it to RTPS */
+  uint32_t ipaddr = get_mros2_ip_addr();
+  return mros2_setIPAddrRTPS(ipaddr);
 }
-
-}  /* namespace mros2_platform */

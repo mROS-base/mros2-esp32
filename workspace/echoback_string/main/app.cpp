@@ -18,9 +18,6 @@
 #include "mros2-platform.h"
 #include "std_msgs/msg/string.hpp"
 
-#include "cmsis_os.h"
-#include "wifi.h"
-
 
 void userCallback(std_msgs::msg::String *msg)
 {
@@ -32,21 +29,16 @@ extern "C" void app_main(void)
   printf("mbed mros2 start!\r\n");
   printf("app name: echoback_string\r\n");
 
-  /* connect to the network, but not be used yet */
-  //mros2_platform::network_connect();
-
-  init_wifi();
-  osKernelStart();
-
-  /* get mros2 IP address and set it to RTPS */
-  std::array<uint8_t, 4> ipaddr;
-  uint8_t mros2_ip_addr_octet[4];
-  get_mros2_ip_addr(mros2_ip_addr_octet);
-  for (int i = 0; i < 4; i++)
-    ipaddr[i] = mros2_ip_addr_octet[i];
-  
-  MROS2_INFO("set mros2 IP address to RTPS: %d.%d.%d.%d\r\n", ipaddr[0], ipaddr[1], ipaddr[2], ipaddr[3]);
-  mros2::setIPAddrRTPS(ipaddr);
+  /* connect to the network */
+  if (mros2_platform_network_connect())
+  {
+    MROS2_INFO("successfully connect and setup network\r\n");
+  }
+  else
+  {
+    MROS2_ERROR("failed to connect and setup network! aborting,,,\r\n");
+    return;
+  }
 
   mros2::init(0, NULL);
   MROS2_DEBUG("mROS 2 initialization is completed\r\n");

@@ -20,6 +20,7 @@ set(SRCS "mros2/src/mros2.cpp"
         "cmsis-esp32/lwip.c"
         "cmsis-esp32/cmsis-esp.c"
         "platform/wifi/wifi.c"
+        "platform/mros2-platform.cpp"
         )
 
 set(INCS "mros2/include"

@@ -158,8 +158,7 @@ void init_wifi(void)
     wifi_init_sta();
 }
 
-void get_mros2_ip_addr(uint8_t octet[4])
+uint32_t get_mros2_ip_addr(void)
 {
-    for (int i = 0; i < 4; i++)
-        octet[i] = mros2_ip_addr >> (i * 8);
+    return mros2_ip_addr;
 }

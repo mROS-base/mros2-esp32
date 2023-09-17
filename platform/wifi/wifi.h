@@ -30,7 +30,7 @@
 extern "C" {
 #endif
 extern void init_wifi(void);
-void get_mros2_ip_addr(uint8_t octet[4]);
+uint32_t get_mros2_ip_addr(void);
 #ifdef __cplusplus
 }
 #endif
