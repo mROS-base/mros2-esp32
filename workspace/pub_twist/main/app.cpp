@@ -1,5 +1,5 @@
 /* mros2 example
- * Copyright (c) 2021 smorita_emb
+ * Copyright (c) 2023 mROS-base
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,19 +15,27 @@
  */
 
 #include "mros2.h"
+#include "mros2-platform.h"
 #include "geometry_msgs/msg/vector3.hpp"
 #include "geometry_msgs/msg/twist.hpp"
 
-#include "cmsis_os.h"
-#include "wifi.h"
 
 extern "C" void app_main(void)
 {
-  init_wifi();
-  osKernelStart();
-
   printf("mbed mros2 start!\r\n");
   printf("app name: pub_twist\r\n");
+
+  /* connect to the network */
+  if (mros2_platform_network_connect())
+  {
+    MROS2_INFO("successfully connect and setup network\r\n");
+  }
+  else
+  {
+    MROS2_ERROR("failed to connect and setup network! aborting,,,\r\n");
+    return;
+  }
+
   mros2::init(0, NULL);
   MROS2_DEBUG("mROS 2 initialization is completed\r\n");
 
