@@ -1,8 +1,5 @@
-# Please set filename that includes mros2 APIs in main/
-# Note that only one file can be specified
-set(APP_SRCS
-                    "app.cpp"
-                    CACHE STRING description)
+# Please set filename of mros2 application in main/
+set(APP_SRCS "app.cpp")
 
 idf_component_register(SRCS ${APP_SRCS}
                     INCLUDE_DIRS "."

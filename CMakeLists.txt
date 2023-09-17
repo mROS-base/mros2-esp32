@@ -38,8 +38,11 @@ idf_component_register(
         SRCS ${SRCS}
         INCLUDE_DIRS ${INCS})
 
+# Generate plaform/templates.hpp from mros2 application code
+## You can add dir(s) in `--indir` if you have several dirs 
+## that contain application code files
 add_custom_command(
         OUTPUT templates.hpp
-        COMMAND python3 ${COMPONENT_PATH}/mros2/mros2_header_generator/templates_generator.py --outdir ${COMPONENT_PATH}/platform --file ${CMAKE_SOURCE_DIR}/main/${APP_SRCS})
+        COMMAND python3 ${COMPONENT_PATH}/mros2/mros2_header_generator/templates_generator.py --outdir ${COMPONENT_PATH}/platform --indir ${CMAKE_SOURCE_DIR}/main)
 add_custom_target(Template SOURCES templates.hpp)
 add_dependencies(${COMPONENT_LIB} Template)
