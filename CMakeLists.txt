@@ -48,3 +48,10 @@ add_custom_command(
         COMMAND python3 ${COMPONENT_PATH}/mros2/mros2_header_generator/templates_generator.py --outdir ${COMPONENT_PATH}/platform --indir ${CMAKE_SOURCE_DIR}/main)
 add_custom_target(Template SOURCES templates.hpp)
 add_dependencies(${COMPONENT_LIB} Template)
+
+# Disable CONFIG_LWIP_IPV6 in sdkconfig
+add_custom_command(
+        OUTPUT sdkconfig
+        COMMAND sed -i 's/CONFIG_LWIP_IPV6=y/CONFIG_LWIP_IPV6=n/g' ${CMAKE_SOURCE_DIR}/sdkconfig)
+add_custom_target(Sdkconfig SOURCES sdkconfig)
+add_dependencies(${COMPONENT_LIB} Sdkconfig)
