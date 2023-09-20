@@ -49,9 +49,13 @@ add_custom_command(
 add_custom_target(Template SOURCES templates.hpp)
 add_dependencies(${COMPONENT_LIB} Template)
 
-# Disable CONFIG_LWIP_IPV6 in sdkconfig
+# Disable CONFIG_LWIP_IPV6 in `sdkconfig` in build process
+## This realizes the same behavior by `idf.py menuconfig`.
+## However, you need to do `idf.py build` twice to refrect
+## all the settings properly.
+message(STATUS "PROJECT=${PROJECT_NAME}")
 add_custom_command(
         OUTPUT sdkconfig
-        COMMAND sed -i 's/CONFIG_LWIP_IPV6=y/CONFIG_LWIP_IPV6=n/g' ${CMAKE_SOURCE_DIR}/sdkconfig)
+        COMMAND grep -q CONFIG_LWIP_IPV6=y ${CMAKE_SOURCE_DIR}/sdkconfig || exit 0 && sed -i 's/CONFIG_LWIP_IPV6=y/CONFIG_LWIP_IPV6=n/g' ${CMAKE_SOURCE_DIR}/sdkconfig)
 add_custom_target(Sdkconfig SOURCES sdkconfig)
 add_dependencies(${COMPONENT_LIB} Sdkconfig)
