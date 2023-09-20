@@ -243,7 +243,7 @@ git clone --recursive https://github.com/mROS-base/mros2-esp32
 
 ### Change file type of source code
 
-You need to change filename to `main/hello_mros2.c` to `main/hello.cpp` because you will use mros2 C++ APIs.
+You need to change filename (.ext) from `main/hello_mros2.c` to `main/hello_mros2.cpp` because you will use mros2 C++ APIs.
 
 ```
 mv main/hello_mros2.c main/hello_mros2.cpp
