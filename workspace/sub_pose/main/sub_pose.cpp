@@ -1,5 +1,5 @@
 /* mros2 example
- * Copyright (c) 2021 smorita_emb
+ * Copyright (c) 2023 mROS-base
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,10 +15,9 @@
  */
 
 #include "mros2.h"
+#include "mros2-platform.h"
 #include "geometry_msgs/msg/pose.hpp"
 
-#include "cmsis_os.h"
-#include "wifi.h"
 
 void userCallback(geometry_msgs::msg::Pose *msg)
 {
@@ -27,18 +26,27 @@ void userCallback(geometry_msgs::msg::Pose *msg)
 
 extern "C" void app_main(void)
 {
-  init_wifi();
-  osKernelStart();
+  /* connect to the network */
+  if (mros2_platform_network_connect())
+  {
+    MROS2_INFO("successfully connect and setup network\r\n---");
+  }
+  else
+  {
+    MROS2_ERROR("failed to connect and setup network! aborting,,,");
+    return;
+  }
 
-  printf("mbed mros2 start!\r\n");
-  printf("app name: sub_pose\r\n");
+  MROS2_INFO("mbed mros2 start!");
+  MROS2_INFO("app name: sub_pose");
+
   mros2::init(0, NULL);
-  MROS2_DEBUG("mROS 2 initialization is completed\r\n");
+  MROS2_DEBUG("mROS 2 initialization is completed");
 
   mros2::Node node = mros2::Node::create_node("sub_pose");
   mros2::Subscriber sub = node.create_subscription<geometry_msgs::msg::Pose>("cmd_vel", 10, userCallback);
   osDelay(100);
-  MROS2_INFO("ready to pub/sub message");
+  MROS2_INFO("ready to pub/sub message\r\n---");
 
   mros2::spin();
   return;

@@ -1,3 +1,3 @@
-idf_component_register(SRCS "app.cpp"
+idf_component_register(SRCS "pub_long_string_sub_crc.cpp"
                     INCLUDE_DIRS "."
-                    PRIV_REQUIRES "mros2-esp32" "wifi")
+                    PRIV_REQUIRES "mros2-esp32")
