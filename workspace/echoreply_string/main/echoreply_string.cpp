@@ -1,5 +1,5 @@
 /* mros2 example
- * Copyright (c) 2021 smorita_emb
+ * Copyright (c) 2023 mROS-base
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,36 +15,44 @@
  */
 
 #include "mros2.h"
+#include "mros2-platform.h"
 #include "std_msgs/msg/string.hpp"
-
-#include "cmsis_os.h"
-#include "wifi.h"
 
 mros2::Subscriber sub;
 mros2::Publisher pub;
 
+
 void userCallback(std_msgs::msg::String *msg)
 {
-  printf("subscribed msg: '%s'\r\n", msg->data.c_str());
-  printf("publishing msg: '%s'\r\n", msg->data.c_str());
+  MROS2_INFO("subscribed msg: '%s'", msg->data.c_str());
+  MROS2_INFO("publishing msg: '%s'", msg->data.c_str());
   pub.publish(*msg);
 }
 
 extern "C" void app_main(void)
 {
-  init_wifi();
-  osKernelStart();
+  /* connect to the network */
+  if (mros2_platform_network_connect())
+  {
+    MROS2_INFO("successfully connect and setup network\r\n---");
+  }
+  else
+  {
+    MROS2_ERROR("failed to connect and setup network! aborting,,,");
+    return;
+  }
 
-  printf("mbed mros2 start!\r\n");
-  printf("app name: echoreply_string\r\n");
+  MROS2_INFO("mbed mros2 start!");
+  MROS2_INFO("app name: echoreply_string");
+
   mros2::init(0, NULL);
-  MROS2_DEBUG("mROS 2 initialization is completed\r\n");
+  MROS2_DEBUG("mROS 2 initialization is completed");
 
   mros2::Node node = mros2::Node::create_node("mros2_node");
   pub = node.create_publisher<std_msgs::msg::String>("to_linux", 10);
   sub = node.create_subscription<std_msgs::msg::String>("to_stm", 10, userCallback);
   osDelay(100);
-  MROS2_INFO("ready to pub/sub message\r\n");
+  MROS2_INFO("ready to pub/sub message\r\n---");
 
   mros2::spin();
   return;

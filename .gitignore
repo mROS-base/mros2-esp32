@@ -3,3 +3,9 @@ sdkconfig
 *.old
 *.lock
 .env
+
+# The templates of pub/sub functions
+## This file will be automatically generated/modified
+## during the build step. So you do not have to care
+## about this file.
+platform/templates.hpp

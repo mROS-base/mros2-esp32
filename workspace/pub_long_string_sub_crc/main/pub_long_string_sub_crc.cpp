@@ -1,5 +1,5 @@
 /* mros2 example
-65;6800;1c * Copyright (c) 2022 mROS-base
+65;6800;1c * Copyright (c) 2023 mROS-base
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,11 +15,10 @@
  */
 
 #include "mros2.h"
+#include "mros2-platform.h"
 #include "std_msgs/msg/string.hpp"
 #include "std_msgs/msg/u_int32.hpp"
 
-#include "cmsis_os.h"
-#include "wifi.h"
 
 // imported from
 // https://github.com/aeldidi/crc32/blob/master/src/crc32.c
@@ -59,44 +58,53 @@ const size_t text_size = sizeof(long_text) / 4;
 void userCallback(std_msgs::msg::UInt32 *msg)
 {
   if (msg->data == crc32(long_text, text_size)) {
-      printf("CRC is OK: 0x%0lx\r\n", msg->data);
-    } else {
-      printf("CRC is NG: 0x%0lx\r\n", msg->data);
-    }
+    MROS2_INFO("CRC is OK: 0x%0lx", msg->data);
+  } else {
+    MROS2_INFO("CRC is NG: 0x%0lx", msg->data);
+  }
 }
 
 extern "C" void app_main(void)
 {
-    init_wifi();
-    osKernelStart();
-
-    printf("mbed mros2 start!\r\n");
-    printf("app name: pub_long_string_sub_crc\r\n");
-    mros2::init(0, NULL);
-    MROS2_DEBUG("mROS 2 initialization is completed\r\n");
-
-    mros2::Node node = mros2::Node::create_node("mros2_node");
-    mros2::Publisher pub = node.create_publisher<std_msgs::msg::String>("to_linux", 1);
-    mros2::Subscriber sub = node.create_subscription<std_msgs::msg::UInt32>("to_stm", 10, userCallback);
-
-    osDelay(100);
-    MROS2_INFO("ready to pub/sub message\r\n");
-
-    auto msg = std_msgs::msg::String();
-
-    while (1)
-    {
-      msg.data.resize(text_size);
-      memcpy(reinterpret_cast<char *>(&msg.data[0]),
-             long_text, text_size);
-
-      printf("publishing message whose CRC(len=%d) is 0x%0lx\r\n",
-             msg.data.size(), crc32(long_text, sizeof(long_text) / 4));
-      pub.publish(msg);
-
-      osDelay(1000);
-    }
-
-    mros2::spin();
+  /* connect to the network */
+  if (mros2_platform_network_connect())
+  {
+    MROS2_INFO("successfully connect and setup network\r\n---");
+  }
+  else
+  {
+    MROS2_ERROR("failed to connect and setup network! aborting,,,");
     return;
+  }
+
+  MROS2_INFO("%s start!", MROS2_PLATFORM_NAME);
+  MROS2_INFO("app name: pub_long_string_sub_crc");
+
+  mros2::init(0, NULL);
+  MROS2_DEBUG("mROS 2 initialization is completed");
+
+  mros2::Node node = mros2::Node::create_node("mros2_node");
+  mros2::Publisher pub = node.create_publisher<std_msgs::msg::String>("to_linux", 1);
+  mros2::Subscriber sub = node.create_subscription<std_msgs::msg::UInt32>("to_stm", 10, userCallback);
+
+  osDelay(100);
+  MROS2_INFO("ready to pub/sub message\r\n---");
+
+  auto msg = std_msgs::msg::String();
+
+  while (1)
+  {
+    msg.data.resize(text_size);
+    memcpy(reinterpret_cast<char *>(&msg.data[0]),
+           long_text, text_size);
+
+    MROS2_INFO("publishing message whose CRC(len=%d) is 0x%0lx",
+           msg.data.size(), crc32(long_text, sizeof(long_text) / 4));
+    pub.publish(msg);
+
+    osDelay(1000);
+  }
+
+  mros2::spin();
+  return;
 }

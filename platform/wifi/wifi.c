@@ -22,6 +22,9 @@ static EventGroupHandle_t s_wifi_event_group;
 static const char *TAG = "wifi station";
 static int s_retry_num = 0;
 
+/* keep IP address obtained in event_handler */
+static uint32_t mros2_ip_addr;
+
 static void event_handler(void *arg, esp_event_base_t event_base,
                           int32_t event_id, void *event_data)
 {
@@ -70,6 +73,9 @@ static void event_handler(void *arg, esp_event_base_t event_base,
         ESP_LOGI(TAG, "got ip:" IPSTR, IP2STR(&event->ip_info.ip));
         s_retry_num = 0;
         xEventGroupSetBits(s_wifi_event_group, WIFI_CONNECTED_BIT);
+        
+        /* keep IP address obtained in event_handler */
+        mros2_ip_addr = event->ip_info.ip.addr;
     }
 }
 
@@ -150,4 +156,9 @@ void init_wifi(void)
 
     ESP_LOGI(TAG, "ESP_WIFI_MODE_STA");
     wifi_init_sta();
+}
+
+uint32_t get_mros2_ip_addr(void)
+{
+    return mros2_ip_addr;
 }

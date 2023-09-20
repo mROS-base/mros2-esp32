@@ -1,5 +1,5 @@
 /* mros2 example
- * Copyright (c) 2022 smorita_emb
+ * Copyright (c) 2023 mROS-base
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,27 +15,35 @@
  */
 
 #include "mros2.h"
+#include "mros2-platform.h"
 #include "sensor_msgs/msg/image.hpp"
 #include "mros_image.h"
 
-#include "cmsis_os.h"
-#include "wifi.h"
 
 extern "C" void app_main(void)
 {
-  init_wifi();
-  osKernelStart();
+  /* connect to the network */
+  if (mros2_platform_network_connect())
+  {
+    MROS2_INFO("successfully connect and setup network\r\n---");
+  }
+  else
+  {
+    MROS2_ERROR("failed to connect and setup network! aborting,,,");
+    return;
+  }
 
-  printf("mros2-posix start!\r\n");
-  printf("app name: pub_image\r\n");
+  MROS2_INFO("%s start!", MROS2_PLATFORM_NAME);
+  MROS2_INFO("app name: pub_image");
+
   mros2::init(0, NULL);
-  MROS2_DEBUG("mROS 2 initialization is completed\r\n");
+  MROS2_DEBUG("mROS 2 initialization is completed");
   
   mros2::Node node = mros2::Node::create_node("mros2_node");
   mros2::Publisher pub = node.create_publisher<sensor_msgs::msg::Image>("to_linux", 10);
 
   osDelay(100);
-  MROS2_INFO("ready to pub image\r\n");
+  MROS2_INFO("ready to pub image\r\n---");
 
   auto msg = sensor_msgs::msg::Image();
 
@@ -53,7 +61,7 @@ extern "C" void app_main(void)
    std::memcpy(reinterpret_cast<char *>(&msg.data[0]),
 	       mros_image, image_size);    
 
-   printf("publishing image\r\n");
+   MROS2_INFO("publishing image");
    pub.publish(msg);
 
    osDelay(1000);
