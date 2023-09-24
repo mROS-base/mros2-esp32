@@ -35,6 +35,10 @@ set(INCS "mros2/include"
         ${CMAKE_SOURCE_DIR}/main
         )
 
+if(NOT CMAKE_BUILD_EARLY_EXPANSION)
+        add_compile_options(-w)
+endif()
+
 idf_component_register(
         SRCS ${SRCS}
         INCLUDE_DIRS ${INCS}

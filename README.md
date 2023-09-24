@@ -105,7 +105,7 @@ idf.py build
 When the build completed successfully, a binary is generated in `build/echoback_string.bin`.
 
 Connect the device to the host via USB cable, and flash the binary to it.
-The default port in Ubuntu may be `/tty/ttyUSB0``, but you may need to change it according to your environment.
+The port `/tty/ttyUSB0` may be adjusted according to your target board and development environment.
 
 ```
 idf.py -p /tty/ttyUSB0 flash
@@ -262,6 +262,7 @@ You need to edit `./CMakeLists.txt` and `./main/CMakeLists.txt` as the below.
   include($ENV{IDF_PATH}/tools/cmake/project.cmake)
   project(hello_mros2)
   ```
+  - This is due to avoid build error about `-Werror=format` in mros2-esp32 logging functions. See [#Issue16](https://github.com/mROS-base/mros2-esp32/issues/16) for details.
 - `./main/CMakeLists.txt`
   ```
   idf_component_register(SRCS "hello_mros2.cpp"  # edit
