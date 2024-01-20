@@ -17,6 +17,7 @@ Please also check [mros2 repository](https://github.com/mROS-base/mros2) for mor
     - [M5Stack Core2](http://docs.m5stack.com/en/core/core2)
     - [M5Stack CoreS3](http://docs.m5stack.com/en/core/CoreS3)
     - [XIAO ESP32C3](https://www.seeedstudio.com/Seeed-XIAO-ESP32C3-p-5431.html) (see [#7](https://github.com/mROS-base/mros2-esp32/issues/7))
+    - [Olimex ESP32-POE (ISO/EA)](https://www.olimex.com/Products/IoT/ESP32/ESP32-POE/open-source-hardware)
   - Kernel: [ESP-IDF FreeRTOS](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos_idf.html)
 - Host environment
   - [ROS 2 Humble Hawksbill](https://docs.ros.org/en/humble/index.html) on Ubuntu 22.04 LTS
