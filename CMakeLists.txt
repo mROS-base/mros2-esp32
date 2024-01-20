@@ -20,6 +20,7 @@ set(SRCS "mros2/src/mros2.cpp"
         "cmsis-esp32/lwip.c"
         "cmsis-esp32/cmsis-esp.c"
         "platform/wifi/wifi.c"
+        "platform/ethernet/ethernet.c"
         "platform/mros2-platform.cpp"
         )
 
@@ -32,6 +33,7 @@ set(INCS "mros2/include"
         "cmsis-esp32/include"
         "platform"
         "platform/wifi"
+        "platform/ethernet"
         ${CMAKE_SOURCE_DIR}/main
         )
 
@@ -42,7 +44,7 @@ endif()
 idf_component_register(
         SRCS ${SRCS}
         INCLUDE_DIRS ${INCS}
-        REQUIRES nvs_flash esp_wifi)
+        REQUIRES nvs_flash esp_wifi esp_eth)
 
 # Generate plaform/templates.hpp from mros2 application code
 ## You can add dir(s) in `--indir` if you have several dirs 

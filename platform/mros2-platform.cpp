@@ -30,7 +30,7 @@
  */
 extern "C" esp_err_t mros2_platform_network_connect(void)
 {
-  init_wifi();
+  init_network();
   osKernelStart();
 
   /* get mros2 IP address and set it to RTPS */
