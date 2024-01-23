@@ -6,6 +6,7 @@
 
 #include "cmsis_os.h"
 #include "wifi.h"
+#include "ethernet.h"
 
 /* convert TARGET_NAME to put into message */
 #define quote(x) std::string(q(x))

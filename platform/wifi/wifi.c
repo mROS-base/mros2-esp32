@@ -7,6 +7,8 @@
 
 #include "wifi.h"
 
+#ifdef CONFIG_M_ROS_ESP_NETIF_WLAN
+
 #include "freertos/FreeRTOS.h"
 #include "freertos/task.h"
 #include "freertos/event_groups.h"
@@ -144,7 +146,7 @@ void wifi_init_sta(void)
     }
 }
 
-void init_wifi(void)
+void init_network(void)
 {
     esp_err_t ret = nvs_flash_init();
     if (ret == ESP_ERR_NVS_NO_FREE_PAGES || ret == ESP_ERR_NVS_NEW_VERSION_FOUND)
@@ -162,3 +164,5 @@ uint32_t get_mros2_ip_addr(void)
 {
     return mros2_ip_addr;
 }
+
+#endif // CONFIG_M_ROS_ESP_NETIF_WLAN

@@ -20,6 +20,7 @@ set(SRCS "mros2/src/mros2.cpp"
         "cmsis-esp32/lwip.c"
         "cmsis-esp32/cmsis-esp.c"
         "platform/wifi/wifi.c"
+        "platform/ethernet/ethernet.c"
         "platform/mros2-platform.cpp"
         )
 
@@ -32,6 +33,7 @@ set(INCS "mros2/include"
         "cmsis-esp32/include"
         "platform"
         "platform/wifi"
+        "platform/ethernet"
         ${CMAKE_SOURCE_DIR}/main
         )
 
@@ -42,14 +44,14 @@ endif()
 idf_component_register(
         SRCS ${SRCS}
         INCLUDE_DIRS ${INCS}
-        REQUIRES nvs_flash esp_wifi)
+        REQUIRES nvs_flash esp_wifi esp_eth)
 
 # Generate plaform/templates.hpp from mros2 application code
 ## You can add dir(s) in `--indir` if you have several dirs 
 ## that contain application code files
 add_custom_command(
         OUTPUT templates.hpp
-        COMMAND python3 ${COMPONENT_PATH}/mros2/mros2_header_generator/templates_generator.py --outdir ${COMPONENT_PATH}/platform --indir ${CMAKE_SOURCE_DIR}/main)
+        COMMAND python ${COMPONENT_PATH}/mros2/mros2_header_generator/templates_generator.py --outdir ${COMPONENT_PATH}/platform --indir ${CMAKE_SOURCE_DIR}/main)
 add_custom_target(Template SOURCES templates.hpp)
 add_dependencies(${COMPONENT_LIB} Template)
 

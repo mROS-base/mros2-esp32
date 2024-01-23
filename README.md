@@ -17,6 +17,7 @@ Please also check [mros2 repository](https://github.com/mROS-base/mros2) for mor
     - [M5Stack Core2](http://docs.m5stack.com/en/core/core2)
     - [M5Stack CoreS3](http://docs.m5stack.com/en/core/CoreS3)
     - [XIAO ESP32C3](https://www.seeedstudio.com/Seeed-XIAO-ESP32C3-p-5431.html) (see [#7](https://github.com/mROS-base/mros2-esp32/issues/7))
+    - [Olimex ESP32-POE (ISO/EA)](https://www.olimex.com/Products/IoT/ESP32/ESP32-POE/open-source-hardware)
   - Kernel: [ESP-IDF FreeRTOS](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos_idf.html)
 - Host environment
   - [ROS 2 Humble Hawksbill](https://docs.ros.org/en/humble/index.html) on Ubuntu 22.04 LTS
@@ -63,16 +64,23 @@ cd mros2-esp32
 
 Note that you cannot change the directory name from `mros2-esp32` since it is used as the component name in `CMakeLists.txt`.
 
-### Setup your SSID and PASS
+### Select network platform
 
-Please setup SSID and PASS for your Wi-Fi AP in `platform/wifi/wifi.h` (be careful that we should not commit and push your network environment to the world :D)
+We support Wi-Fi and Ethernet. User `idf.py menuconfig` and go to `mROS Settings -> mROS network interface select` to choose the mode. Note that only one mode is supported at the same time.
 
-```platform/wifi/wifi.h
-#define ESP_WIFI_SSID "SSID"
-#define ESP_WIFI_PASS "PASS"
-```
+#### Setup your SSID and PASS
+
+Please setup SSID and PASS for your Wi-Fi AP in `idf.py menuconfig` and go to `mROS Settings -> Wifi Configuration`   (be careful that we should not commit and push your network environment to the world :D)
 
 Again, make sure that its SSID assigns IP by DHCP and is dedicated to 2.4 GHz band.
+
+### Setup ethernet
+
+See the [configuration guidline](https://github.com/espressif/esp-idf/blob/master/examples/ethernet/README.md#common-configurations) of espressif to setup your ethernet correctly.
+
+We selected the default settings to support the following boards out of the box:
+
+- [Olimex ESP32-POE (ISO/EA)](https://www.olimex.com/Products/IoT/ESP32/ESP32-POE/open-source-hardware)
 
 ### Set target
 
