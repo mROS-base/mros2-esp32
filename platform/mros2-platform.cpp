@@ -23,17 +23,29 @@
 
 #include "cmsis_os.h"
 #include "wifi.h"
-
+#include "ethernet_example_main.h"
 
 /*
  *  Setup network I/F
  */
 extern "C" esp_err_t mros2_platform_network_connect(void)
 {
+#ifdef CONFIG_MROS2_ESP32_NETIF_WIFI
   init_wifi();
+#elif CONFIG_MROS2_ESP32_NETIF_ETH_SPI
+  init_ethernet();
+#else
+  init_wifi();
+#endif
   osKernelStart();
 
   /* get mros2 IP address and set it to RTPS */
+#ifdef CONFIG_MROS2_ESP32_NETIF_WIFI
   uint32_t ipaddr = get_mros2_ip_addr();
+#elif CONFIG_MROS2_ESP32_NETIF_ETH_SPI
+  uint32_t ipaddr = get_mros2_ip_addr_eth();
+#else
+  uint32_t ipaddr = get_mros2_ip_addr();
+#endif
   return mros2_setIPAddrRTPS(ipaddr);
 }
