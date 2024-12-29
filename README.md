@@ -9,14 +9,16 @@ Please also check [mros2 repository](https://github.com/mROS-base/mros2) for mor
 
 ## Supported environment
 
-- ESP32 board
-  - For now, these boards below are confirmed to run the example on them.
-    - [ESP32-S3-DevKitC-1](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/hw-reference/esp32s3/user-guide-devkitc-1.html)
-  - These boards below are also confirmed but not always supported in the latest version (due to our development resources,,,).
-    - [M5Stack Basic](http://docs.m5stack.com/en/core/basic)
-    - [M5Stack Core2](http://docs.m5stack.com/en/core/core2)
-    - [M5Stack CoreS3](http://docs.m5stack.com/en/core/CoreS3)
-    - [XIAO ESP32C3](https://www.seeedstudio.com/Seeed-XIAO-ESP32C3-p-5431.html) (see [#7](https://github.com/mROS-base/mros2-esp32/issues/7))
+- Target device: ESP32 family
+  - Boards
+    - For now, these boards below are confirmed to run the example on them.
+      - [ESP32-S3-DevKitC-1](https://docs.espressif.com/projects/esp-idf/en/latest/esp32s3/hw-reference/esp32s3/user-guide-devkitc-1.html)
+    - These boards below are also confirmed but not always supported in the latest version (due to our development resources,,,).
+      - [M5Stack Basic](http://docs.m5stack.com/en/core/basic)
+      - [M5Stack Core2](http://docs.m5stack.com/en/core/core2)
+      - [M5Stack CoreS3](http://docs.m5stack.com/en/core/CoreS3)
+      - [XIAO ESP32C3](https://www.seeedstudio.com/Seeed-XIAO-ESP32C3-p-5431.html) (see [#7](https://github.com/mROS-base/mros2-esp32/issues/7))
+  - SDK: [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/index.html)
   - Kernel: [ESP-IDF FreeRTOS](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos_idf.html)
 - Host environment
   - [ROS 2 Humble Hawksbill](https://docs.ros.org/en/humble/index.html) on Ubuntu 22.04 LTS
