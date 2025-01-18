@@ -22,6 +22,7 @@ Please also check [mros2 repository](https://github.com/mROS-base/mros2) for mor
       - [ESP32-C6-DevKitC-1](https://docs.espressif.com/projects/esp-dev-kits/en/latest/esp32c6/esp32-c6-devkitc-1/user_guide.html) (see [#21](https://github.com/mROS-base/mros2-esp32/issues/21))
       - [Seeed Studio XIAO ESP32C6](https://www.seeedstudio.com/Seeed-Studio-XIAO-ESP32C6-p-5884.html) (see [#23](https://github.com/mROS-base/mros2-esp32/issues/23))
       - [Seeed Studio XIAO ESP32S3](https://www.seeedstudio.com/XIAO-ESP32S3-p-5627.html) (see [#24](https://github.com/mROS-base/mros2-esp32/issues/24))
+      - [M5StickC Plus2](https://docs.m5stack.com/en/core/M5StickC%20PLUS2) (see [#31](https://github.com/mROS-base/mros2-esp32/issues/31))
   - SDK: [ESP-IDF](https://docs.espressif.com/projects/esp-idf/en/stable/esp32/index.html)
   - Kernel: [ESP-IDF FreeRTOS](https://docs.espressif.com/projects/esp-idf/en/latest/esp32/api-reference/system/freertos_idf.html)
 - Host environment
